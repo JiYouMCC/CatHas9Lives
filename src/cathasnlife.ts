@@ -368,7 +368,7 @@ function doingLicense() {
     let titleStr: string = "<tr><th>编号</th><th>玩家姓名</th><th>身份</th>";
 
     for (var i = 0; i < rule.cardEach; i++) {
-        titleStr += "<th></th>";
+        titleStr += "<th class='card_item'></th>";
     }
     titleStr += "</tr>";
     document.getElementById("result").innerHTML = titleStr;

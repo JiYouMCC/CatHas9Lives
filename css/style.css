@@ -46,3 +46,7 @@ textarea {
     float: initial;
     margin:auto;
 }
+
+.card_item {
+    width: 120px;
+}
