@@ -323,7 +323,6 @@ function processCardStr(str: string, cardType: CardType, cardTable: Array<CardTa
         let itemArray = lineStr.split(",");
         cardTable.push(new CardTableItem(new Card(itemArray[0], cardType), +itemArray[1]));
     }
-
 }
 
 function doingLicense() {
@@ -340,7 +339,14 @@ function doingLicense() {
 
     let result = license(rule);
 
-    document.getElementById("result").innerHTML = "<th>编号</th><th>玩家姓名</th><th>阵营</th><th></th><th></th><th></th><th></th><th></th>";
+    let titleStr: string = "<tr><th>编号</th><th>玩家姓名</th><th>阵营</th>";
+
+    for (var i = 0; i < rule.cardEach; i++) {
+        titleStr += "<th></th>";
+    }
+    titleStr += "</tr>";
+    document.getElementById("result").innerHTML = titleStr;
+
     for (var i = 0; i < result.players.length; i++) {
         let player: Player = result.players[i];
         let str = "<tr>";
@@ -351,25 +357,17 @@ function doingLicense() {
             let card: Card = player.cards[j];
             str += "<td class='card" + card.cardType + "'>" + card.name + "</td>";
         }
+        str += "</tr>";
 
         document.getElementById("result").innerHTML += str;
     }
+
+    let abandonStr: string = "<tr><td>弃牌</td><td colspan=" + (rule.cardEach + 2) + ">";
+    for (var i = 0; i < result.abandonCards.length; i++) {
+        let card: Card = result.abandonCards[i];
+        abandonStr += "【" + card.name + "】";
+    }
+    
+    abandonStr += "</td></tr>";
+    document.getElementById("result").innerHTML += abandonStr;
 }
-
-/* [
-        new CardTableItem(new Card("杀手牌", CardType.Identity), 1),
-        new CardTableItem(new Card("狼人牌", CardType.Identity), 1),
-
-        new CardTableItem(new Card("狙击手牌", CardType.Privilege), 2),
-        new CardTableItem(new Card("束魂牌", CardType.Privilege), 2),
-        new CardTableItem(new Card("巫医牌", CardType.Privilege), 2),
-        new CardTableItem(new Card("防弹衣/狼毒牌", CardType.Privilege), 2),
-        new CardTableItem(new Card("禁锢/反狙击牌", CardType.Privilege), 2),
-        new CardTableItem(new Card("绝杀/特赦牌", CardType.Privilege), 2),
-        new CardTableItem(new Card("诅咒/庇佑牌", CardType.Privilege), 2),
-        new CardTableItem(new Card("纵火/圣人牌", CardType.Privilege), 2),
-        new CardTableItem(new Card("保镖牌", CardType.Privilege), 3),
-        new CardTableItem(new Card("阿米巴变形牌", CardType.Privilege), 3),
-
-        new CardTableItem(new Card("庶民牌", CardType.Resource), 12)
-    ];*/
