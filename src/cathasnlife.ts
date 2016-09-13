@@ -3,15 +3,19 @@ enum Camp {
     Werewolf,
     People,
     Optional,
+    KillerHelper,
+    WereWolfHelper,
     Unknow
 }
 
 let CampZH = {
-    Killer: "杀手阵营",
-    Werewolf: "狼人阵营",
-    People: "平民阵营",
-    Optional: "可选阵营",
-    Unknow: "未知阵营"
+    Killer: "杀手",
+    Werewolf: "狼人",
+    People: "平民",
+    Optional: "可选",
+    KillerHelper: "杀助",
+    WereWolfHelper: "狼崽",
+    Unknow: "未知"
 
 }
 enum CardType {
@@ -105,8 +109,11 @@ class Rule {
     cardEach: number;
     cardTable: Array<CardTableItem>;
     optionalCount: number;
+    killerHelperCount: number;
+    werewolfHelperCount: number;
     resourceRange: Array<number>;
     retryTime: number;
+    keepResource: boolean;
 }
 
 function makeCards(cardTable: Array<CardTableItem>) {
@@ -158,7 +165,8 @@ function license(rule: Rule) {
             do {
                 cardId = randomArray(tempCards);
                 card = tempCards[cardId];
-            } while (card.cardType == CardType.Identity);
+
+            } while (card.cardType == CardType.Identity || (rule.keepResource && card.cardType == CardType.Resource));
             abandonCards.push(card);
             tempCards.splice(cardId, 1);
         }
@@ -225,7 +233,7 @@ function license(rule: Rule) {
         }
 
         //阵营判断
-        calCamp(tempPlayers, rule.optionalCount);
+        calCamp(tempPlayers, rule.optionalCount, rule.killerHelperCount, rule.werewolfHelperCount);
         break;
     }
 
@@ -267,7 +275,7 @@ function licenseResource(cards: Array<Card>, players: Array<Player>, resourceRan
     return true;
 }
 
-function calCamp(players: Array<Player>, optionalCount) {
+function calCamp(players: Array<Player>, optionalCount, killerHelperCount, werewolfHelperCount) {
     let unknowPlay: Array<Player> = [];
     for (var i = 0; i < players.length; i++) {
         let player: Player = players[i];
@@ -285,6 +293,20 @@ function calCamp(players: Array<Player>, optionalCount) {
         let selectId: number = randomArray(unknowPlay);
         let selectPlayer: Player = unknowPlay[selectId];
         selectPlayer.setCamp(Camp.Optional);
+        unknowPlay.splice(selectId, 1);
+    }
+
+    for (var i = 0; i < killerHelperCount; i++) {
+        let selectId: number = randomArray(unknowPlay);
+        let selectPlayer: Player = unknowPlay[selectId];
+        selectPlayer.setCamp(Camp.KillerHelper);
+        unknowPlay.splice(selectId, 1);
+    }
+
+    for (var i = 0; i < werewolfHelperCount; i++) {
+        let selectId: number = randomArray(unknowPlay);
+        let selectPlayer: Player = unknowPlay[selectId];
+        selectPlayer.setCamp(Camp.WereWolfHelper);
         unknowPlay.splice(selectId, 1);
     }
 
@@ -334,12 +356,16 @@ function doingLicense() {
     rule.cardEach = +(<HTMLInputElement>document.getElementById("cardEach")).value;
     rule.cardTable = cardTable;
     rule.optionalCount = +(<HTMLInputElement>document.getElementById("optionalCount")).value;
+    rule.killerHelperCount = +(<HTMLInputElement>document.getElementById("killerHelperCount")).value;
+    rule.werewolfHelperCount = +(<HTMLInputElement>document.getElementById("werewolfHelperCount")).value;
+    rule.keepResource = (<HTMLInputElement>document.getElementById("keepResource")).checked;
+
     rule.resourceRange = [+(<HTMLInputElement>document.getElementById("resourceMin")).value, +(<HTMLInputElement>document.getElementById("resourceMax")).value];
     rule.retryTime = 20;
 
     let result = license(rule);
 
-    let titleStr: string = "<tr><th>编号</th><th>玩家姓名</th><th>阵营</th>";
+    let titleStr: string = "<tr><th>编号</th><th>玩家姓名</th><th>身份</th>";
 
     for (var i = 0; i < rule.cardEach; i++) {
         titleStr += "<th></th>";
@@ -367,7 +393,7 @@ function doingLicense() {
         let card: Card = result.abandonCards[i];
         abandonStr += "【" + card.name + "】";
     }
-    
+
     abandonStr += "</td></tr>";
     document.getElementById("result").innerHTML += abandonStr;
 }

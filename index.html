@@ -1,53 +1,59 @@
 <!DOCTYPE html lang="Zh_cn">
 <html>
-<head>
-    <meta charset="utf-8">
-    <title></title>
-    <script type="text/javascript" src="src/cathasnlife.js"></script>
-    <style type="text/css">
-        .camp1 {
-            color: red;
-        }
-
-        .camp2 {
-            color: blue;
-        }
-
-        .camp4 {
-            color: purple;
-        }
-
-        .card1 {
-            color: red;
-        }
-
-        .card2 {
-            color: green;
-        }
-    </style>
-</head>
-<body>
-    <h1>猫命规则发牌</h1>
-    <p><label>玩家数量:</label><input id="playerCount" type="number" value="7"></p>
-    <p><label>每人牌数:</label><input id="cardEach" type="number" value="5"></p>
-    <p><label>自选阵营:</label><input id="optionalCount" type="number" value="1"></p>
-    <p><label>水牌范围:</label><input id="resourceMin" type="number" value="1"> - <input id="resourceMax" type="number" value="2"></p>
-<table>
-    <tr><th>身份特权牌</th></thead></tr>
-    <tr><td><textarea id="cardIdentity" rows="3">杀手牌,1
-狼人牌,1</textarea></td></tr>
-</table>
-<table>
-
-<table>
-    <tr><th>资源牌</th></thead></tr>
-    <tr><td><textarea id="cardResource" rows="3">庶民牌,12</textarea></td></tr>
-</table>
-<table>
-
-<table>
-    <tr><th>特权牌</th></thead></tr>
-    <tr><td><textarea id="cardPrivilege" rows="12">狙击手牌,2
+    <head>
+        <meta charset="utf-8">
+        <title>猫命规则发牌器</title>
+        <script type="text/javascript" src="src/cathasnlife.js"></script>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>猫命规则发牌器</h1>
+    <table border="1">
+        <caption>基本参数</caption>
+        <tr>
+            <td>玩家数量</td>
+            <td><input id="playerCount" type="number" value="7" min="1"></td>
+            <td>7人或9人d</td>
+        </tr>
+        <tr>
+            <td>每人牌数</td>
+            <td><input id="cardEach" type="number" value="5" min="1"></td>
+            <td>7人规则为5张，9人规则为6张。</td>
+        </tr>
+        <tr>
+            <td>自选阵营人数</td>
+            <td><input id="optionalCount" type="number" value="1" min="0"></td>
+            <td>7人规则有1人自选阵营。</td>
+        </tr>
+        <tr>
+            <td>杀助人数</td>
+            <td><input id="killerHelperCount" type="number" value="0" min="0"></td>
+            <td>9人规则有1个杀助。</td>
+        </tr>
+        <tr>
+            <td>狼崽人数</td>
+            <td><input id="werewolfHelperCount" type="number" value="0" min="0"></td>
+            <td>9人规则有1个狼崽。</td>
+        </tr>
+        <tr>
+            <td>每人水牌数量范围</td>
+            <td><input id="resourceMin" type="number" value="1" min="0"> ~ <input id="resourceMax" type="number" value="2" min="0"></td>
+            <td>7人规则范围为1~2，9人规则为3~3。</td>
+        </tr>
+        <tr>
+            <td>水牌不得弃</td>
+            <td><input type="checkbox" id="keepResource"></td>
+            <td>9人规则请钩上这个选项。</td>
+        </tr>
+    </table>
+    <table border="1">
+        <caption>牌组设定</caption>
+        <tr><th>身份特权牌</th><th>资源牌</th><th>特权牌</th></tr>
+        <tr>
+            <td><textarea id="cardIdentity" rows="14">杀手牌,1
+狼人牌,1</textarea></td>
+            <td><textarea id="cardResource" rows="14">庶民牌,12</textarea></td>
+            <td><textarea id="cardPrivilege" rows="14">狙击手牌,2
 束魂牌,2
 巫医牌,2
 防弹衣/狼毒牌,2
@@ -56,10 +62,16 @@
 诅咒/庇佑牌,2
 纵火/圣人牌,2
 保镖牌,3
-阿米巴变形牌,3</textarea></td></tr>
-</table>
-<table>
+阿米巴变形牌,3</textarea></td>
+        </tr>
+        <tr>
+            <td>请勿修改牌名</td>
+            <td>9人规则27张。</td>
+            <td></td>
+        </tr>
+    </table>
     <table border="1">
+        <caption>玩家设定</caption>
         <tbody>
             <tr><th>编号</th><th>玩家姓名</th></tr>
             <tr><td>1</td><td><input type="text" id="player_1" value="斑马"></td></tr>
@@ -69,16 +81,19 @@
             <tr><td>5</td><td><input type="text" id="player_5" value="睡觉觉"></td></tr>
             <tr><td>6</td><td><input type="text" id="player_6" value="瓶子"></td></tr>
             <tr><td>7</td><td><input type="text" id="player_7" value="折光"></td></tr>
-            <tr><td>8</td><td><input type="text" id="player_8" value="飞鱼"></td></tr>
-            <tr><td>9</td><td><input type="text" id="player_9" value="桃子"></td></tr>
+            <tr><td>8</td><td><input type="text" id="player_8" value=""></td></tr>
+            <tr><td>9</td><td><input type="text" id="player_9" value=""></td></tr>
         </tbody>
     </table>
     <p style="clear: both">
     <p><button onclick="doingLicense();">发牌</button></p>
-    <table border="1" style="clear: left">
+    <div style="width: 100%;margin:auto;">
+    <table id="result_table" border="1">
+        <caption>发牌结果</caption>
         <tbody id="result">
         </tbody>
     </table>
+    </div>
 </body>
 
 </html>
