@@ -16,6 +16,8 @@
     阿米巴变形牌,3
     
     庶民牌,12
+    
+![](1.png)
 
 猫命9人规则：https://github.com/JiYouMCC/CatHasNLives/blob/master/doc/rule_of_9.md
 
@@ -31,3 +33,5 @@
     阿米巴变形牌,4
     
     资源牌,27
+    
+![](2.png)
