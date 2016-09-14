@@ -397,3 +397,56 @@ function doingLicense() {
     abandonStr += "</td></tr>";
     document.getElementById("result").innerHTML += abandonStr;
 }
+
+interface RuleTable {
+    playerCount: number;
+    cardEach: number;
+    optionalCount: number;
+    killerHelperCount: number;
+    werewolfHelperCount: number;
+    resourceRange: Array<number>;
+    keepResource: boolean;
+    cardIdentity: string;
+    cardResource: string;
+    cardPrivilege: string;
+}
+
+function setRule(rule: RuleTable) {
+    (<HTMLInputElement>document.getElementById("playerCount")).value = rule.playerCount.toString();
+    (<HTMLInputElement>document.getElementById("cardEach")).value = rule.cardEach.toString();
+    (<HTMLInputElement>document.getElementById("optionalCount")).value = rule.optionalCount.toString();
+    (<HTMLInputElement>document.getElementById("killerHelperCount")).value = rule.killerHelperCount.toString();
+    (<HTMLInputElement>document.getElementById("werewolfHelperCount")).value = rule.werewolfHelperCount.toString();
+    (<HTMLInputElement>document.getElementById("resourceMin")).value = rule.resourceRange[0].toString();
+    (<HTMLInputElement>document.getElementById("resourceMax")).value = rule.resourceRange[1].toString();
+    (<HTMLInputElement>document.getElementById("keepResource")).checked = rule.keepResource;
+    (<HTMLInputElement>document.getElementById("cardIdentity")).value = rule.cardIdentity;
+    (<HTMLInputElement>document.getElementById("cardResource")).value = rule.cardResource;
+    (<HTMLInputElement>document.getElementById("cardPrivilege")).value = rule.cardPrivilege;
+}
+
+let rule_7: RuleTable = {
+    playerCount: 7,
+    cardEach: 5,
+    optionalCount: 1,
+    killerHelperCount: 0,
+    werewolfHelperCount: 0,
+    resourceRange: [1, 2],
+    keepResource: false,
+    cardIdentity: "杀手牌,1\n狼人牌,1",
+    cardResource: "庶民牌,12",
+    cardPrivilege: "狙击手牌,2\n束魂牌,2\n巫医牌,2\n防弹衣/狼毒牌,2\n禁锢/反狙击牌,2\n绝杀/特赦牌,2\n诅咒/庇佑牌,2\n纵火/圣人牌,2\n保镖牌,3\n阿米巴变形牌,3"
+}
+
+let rule_9: RuleTable = {
+    playerCount: 9,
+    cardEach: 6,
+    optionalCount: 0,
+    killerHelperCount: 1,
+    werewolfHelperCount: 1,
+    resourceRange: [3, 3],
+    keepResource: true,
+    cardIdentity: "杀手牌,1\n狼人牌,1",
+    cardResource: "庶民牌,27",
+    cardPrivilege: "狙击手牌,3\n束魂牌,3\n巫医牌,3\n防弹衣/狼毒牌,3\n禁锢/反狙击牌,2\n绝杀/特赦牌,2\n诅咒/庇佑牌,2\n纵火/圣人牌,2\n保镖牌,4\n阿米巴变形牌,4"
+}
