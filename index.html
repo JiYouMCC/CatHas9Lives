@@ -10,8 +10,10 @@
         <h1>猫命规则发牌器</h1>
         <p>
             <a href="https://github.com/JiYouMCC/CatHasNLives" target="_blank">Github仓库</a>
-            <a href="#" onclick="setRule(rule_7);">设定为7人规则</a>
-            <a href="#" onclick="setRule(rule_9);">设定为9人规则</a>
+            <a href="#" onclick="setRule(rule_7);">【7人规则】</a>
+            <a href="#" onclick="setRule(rule_9);">【9人规则】</a>
+            <a href="#" onclick="setRule(rule_single);">【12人3杀1.0规则】</a>
+            <a href="#" onclick="setRule(rule_20);">【12人3警3杀2.0规则】</a>
         </p>
     <table border="1">
         <caption>基本参数</caption>
@@ -66,16 +68,15 @@
     <table border="1">
         <caption>玩家设定</caption>
         <tbody>
-            <tr><th>编号</th><th>玩家姓名</th></tr>
-            <tr><td>1</td><td><input type="text" id="player_1" value="斑马"></td></tr>
-            <tr><td>2</td><td><input type="text" id="player_2" value="叶子"></td></tr>
-            <tr><td>3</td><td><input type="text" id="player_3" value="小蝶"></td></tr>
-            <tr><td>4</td><td><input type="text" id="player_4" value="楼兰"></td></tr>
-            <tr><td>5</td><td><input type="text" id="player_5" value="睡觉觉"></td></tr>
-            <tr><td>6</td><td><input type="text" id="player_6" value="瓶子"></td></tr>
-            <tr><td>7</td><td><input type="text" id="player_7" value="折光"></td></tr>
-            <tr><td>8</td><td><input type="text" id="player_8" value="鸡毛"></td></tr>
-            <tr><td>9</td><td><input type="text" id="player_9" value="飞鱼"></td></tr>
+            <tr><td><textarea rows="16" id="players">斑马
+叶子
+小蝶
+楼兰
+睡觉觉
+瓶子
+折光
+鸡毛
+飞鱼</textarea></td></tr>
         </tbody>
     </table>
     <p style="clear: both">

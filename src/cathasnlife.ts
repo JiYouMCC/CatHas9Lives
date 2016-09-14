@@ -322,11 +322,20 @@ function randomArray(array) {
 //-----------------------------------------------
 
 function getPlayers(playerCount: number) {
+    let playerNames: string = (<HTMLInputElement>document.getElementById("players")).value;
+    let nameArray = playerNames.split("\n");
+
     let players: Array<Player> = [];
-    for (var i = 1; i <= playerCount; i++) {
-        let playerName: string = (<HTMLInputElement>document.getElementById("player_" + i)).value;
-        players.push(new Player(playerName));
+    for (var i = 0; i < Math.min(nameArray.length, playerCount); i++) {
+        players.push(new Player(nameArray[i]));
     }
+
+    if (playerCount > nameArray.length) {
+        for (var i = 1; i <= playerCount - nameArray.length; i++)
+            players.push(new Player("没名字玩家" + i));
+    }
+
+
     return players;
 }
 
@@ -449,4 +458,30 @@ let rule_9: RuleTable = {
     cardIdentity: "杀手牌,1\n狼人牌,1",
     cardResource: "庶民牌,27",
     cardPrivilege: "狙击手牌,3\n束魂牌,3\n巫医牌,3\n防弹衣/狼毒牌,3\n禁锢/反狙击牌,2\n绝杀/特赦牌,2\n诅咒/庇佑牌,2\n纵火/圣人牌,2\n保镖牌,4\n阿米巴变形牌,4"
+}
+
+let rule_single: RuleTable = {
+    playerCount: 12,
+    cardEach: 1,
+    optionalCount: 0,
+    killerHelperCount: 0,
+    werewolfHelperCount: 0,
+    resourceRange: [0, 1],
+    keepResource: false,
+    cardIdentity: "杀手牌,3",
+    cardResource: "平民牌,9",
+    cardPrivilege: ""
+}
+
+let rule_20:RuleTable = {
+    playerCount: 12,
+    cardEach: 1,
+    optionalCount: 0,
+    killerHelperCount: 0,
+    werewolfHelperCount: 0,
+    resourceRange: [0, 1],
+    keepResource: false,
+    cardIdentity: "杀手牌,3",
+    cardResource: "平民牌,6",
+    cardPrivilege: "警察牌,3"
 }

@@ -50,3 +50,7 @@ textarea {
 .card_item {
     width: 120px;
 }
+
+#players {
+    width:100%;
+}
