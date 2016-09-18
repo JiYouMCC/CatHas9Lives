@@ -1,0 +1,23 @@
+{
+  "name": "cat-has-n-lives",
+  "version": "1.0.0",
+  "description": "Tools for mafia game with special rule "Cat Has N Lives"",
+  "main": "src/cathasnlife.js",
+  "devDependencies": {
+    "tsd": "^0.6.5",
+    "typescript": "^1.8.10"
+  },
+  "scripts": {
+    "postinstall": "tsd install",
+    "build": "tsc cathasnlife.ts --charset "utf8"",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JiYouMCC/CatHasNLives.git"
+  },
+  "author": "Ji You <jiyou.linux@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/JiYouMCC/CatHasNLives/issues"
+  },
+  "homepage": "http://c9.jithee.name"
+}
