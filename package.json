@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc src/cathasnlife.ts --charset \"utf8\"",
     "minify":"minify src/cathasnlife.js",
-    "compile": "npm run build & npm run minify"
+    "compile": "npm run minify & npm run build"
   },
   "repository": {
     "type": "git",
