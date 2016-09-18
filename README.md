@@ -1,4 +1,4 @@
-# 猫命游戏工具
+# 猫命游戏工具 [![Build Status](https://travis-ci.org/JiYouMCC/CatHasNLives.svg?branch=master)](https://travis-ci.org/JiYouMCC/CatHasNLives)
 
     tsc cathasnlife.ts --charset "utf8"
 
