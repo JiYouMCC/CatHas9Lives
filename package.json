@@ -2,7 +2,7 @@
   "name": "cat-has-n-lives",
   "version": "1.0.0",
   "description": "Tools for mafia game with special rule \"Cat Has N Lives\"",
-  "main": "src/cathasnlife.js",
+  "main": "src/cathasnlife.min.js",
   "devDependencies": {
     "tsd": "^0.6.5",
     "typescript": "^1.8.10",
