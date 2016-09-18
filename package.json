@@ -1,15 +1,17 @@
 {
   "name": "cat-has-n-lives",
   "version": "1.0.0",
-  "description": "Tools for mafia game with special rule "Cat Has N Lives"",
+  "description": "Tools for mafia game with special rule \"Cat Has N Lives\"",
   "main": "src/cathasnlife.js",
   "devDependencies": {
     "tsd": "^0.6.5",
-    "typescript": "^1.8.10"
+    "typescript": "^1.8.10",
+    "minifier": "^0.8.0"
   },
   "scripts": {
-    "postinstall": "tsd install",
-    "build": "tsc cathasnlife.ts --charset "utf8"",
+    "build": "tsc src/cathasnlife.ts --charset \"utf8\"",
+    "minify":"minify src/cathasnlife.js",
+    "compile": "npm run build & npm run minify"
   },
   "repository": {
     "type": "git",
