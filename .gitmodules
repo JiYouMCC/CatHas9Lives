@@ -1,0 +1,4 @@
+[submodule "style-submodule"]
+	path = style-submodule
+	url = https://github.com/JiYouMCC/JiYouMCCStyle
+	branch = for-sub
