@@ -17,7 +17,7 @@
     
     庶民牌,12
     
-![](1.png)
+![](img/1.png)
 
 猫命9人规则：https://github.com/JiYouMCC/CatHasNLives/blob/master/doc/rule_of_9.md
 
@@ -34,4 +34,4 @@
     
     资源牌,27
     
-![](2.png)
+![](img/2.png)
