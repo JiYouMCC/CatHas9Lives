@@ -158,7 +158,7 @@ function license(rule: Rule) {
             player.clearCards();
         }
 
-        // Deside which card(s) to abandon
+        // Deside which card(s) to abandon 先弃牌
         for (var i = 0; i < abandonCardsCount; i++) {
             let card: Card = undefined;
             let cardId: number = undefined;
@@ -171,7 +171,7 @@ function license(rule: Rule) {
             tempCards.splice(cardId, 1);
         }
 
-        // License People Cards
+        // License People Cards 发资源牌（水牌）
         if (!licenseResource(tempCards, tempPlayers, rule.resourceRange)) {
             return { result: false, abandonCards: [], players: [] };
         }
@@ -204,7 +204,8 @@ function license(rule: Rule) {
                 }
             }
 
-            let checkLimit = false;
+            // 身份牌不能多拿，不然重发这一张
+            let checkLimit = false; 
             for (var i = privilegeStrs.length - 1; i >= 0; i--) {
                 let privilege = privilegeStrs[i];
                 if (card.name == privilege) {
@@ -449,15 +450,15 @@ let rule_7: RuleTable = {
 
 let rule_9: RuleTable = {
     playerCount: 9,
-    cardEach: 6,
+    cardEach: 5,
     optionalCount: 0,
     killerHelperCount: 1,
     werewolfHelperCount: 1,
-    resourceRange: [3, 3],
+    resourceRange: [2, 2],
     keepResource: true,
     cardIdentity: "杀手牌,1\n狼人牌,1",
-    cardResource: "庶民牌,27",
-    cardPrivilege: "狙击手牌,3\n束魂牌,3\n巫医牌,3\n防弹衣/狼毒牌,3\n禁锢/反狙击牌,2\n绝杀/特赦牌,2\n诅咒/庇佑牌,2\n纵火/圣人牌,2\n保镖牌,4\n阿米巴变形牌,4"
+    cardResource: "资源牌,18",
+    cardPrivilege: "纵火/圣人牌,2\n绝杀/特赦牌,2\n禁锢/反狙击牌,2\n防弹衣/狼毒牌,2\n狙击手牌,3\n束魂牌,3\n巫医牌,3\n诅咒/庇佑牌,3\n保镖牌,4\n变形牌,4"
 }
 
 let rule_single: RuleTable = {
