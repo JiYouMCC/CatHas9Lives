@@ -1,59 +1,104 @@
 <!DOCTYPE html lang="Zh_cn">
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>猫命规则发牌器</title>
-        <script type="text/javascript" src="src/cathasnlife.min.js"></script>
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-        <h1>猫命规则发牌器</h1>
-        <p>
-            <a href="https://github.com/JiYouMCC/CatHasNLives" target="_blank">Github仓库</a>
-            <a href="#" onclick="setRule(rule_7);">【7人规则】</a>
-            <a href="#" onclick="setRule(rule_9);">【9人规则】</a>
-            <a href="#" onclick="setRule(rule_single);">【12人3杀1.0规则】</a>
-            <a href="#" onclick="setRule(rule_20);">【12人3警3杀2.0规则】</a>
-        </p>
-    <table border="1">
-        <caption>基本参数</caption>
-        <tr>
-            <td>玩家数量</td>
-            <td><input id="playerCount" type="number" value="7" min="1"></td>
-        </tr>
-        <tr>
-            <td>每人牌数</td>
-            <td><input id="cardEach" type="number" value="5" min="1"></td>
-        </tr>
-        <tr>
-            <td>自选阵营人数</td>
-            <td><input id="optionalCount" type="number" value="1" min="0"></td>
-        </tr>
-        <tr>
-            <td>杀助人数</td>
-            <td><input id="killerHelperCount" type="number" value="0" min="0"></td>
-        </tr>
-        <tr>
-            <td>狼崽人数</td>
-            <td><input id="werewolfHelperCount" type="number" value="0" min="0"></td>
-        </tr>
-        <tr>
-            <td>每人水牌数量范围</td>
-            <td><input id="resourceMin" type="number" value="1" min="0"> ~ <input id="resourceMax" type="number" value="2" min="0"></td>
-        </tr>
-        <tr>
-            <td>水牌不得弃</td>
-            <td><input type="checkbox" id="keepResource"></td>
-        </tr>
-    </table>
-    <table border="1">
-        <caption>牌组设定</caption>
-        <tr><th>身份特权牌</th><th>资源牌</th><th>特权牌</th></tr>
-        <tr>
-            <td><textarea id="cardIdentity" rows="14">杀手牌,1
-狼人牌,1</textarea></td>
-            <td><textarea id="cardResource" rows="14">庶民牌,12</textarea></td>
-            <td><textarea id="cardPrivilege" rows="14">狙击手牌,2
+  <head>
+    <meta charset="utf-8">
+      <title>猫命规则发牌器</title>
+      <link rel="stylesheet" href="css/uikit.min.css" />
+      <script type="text/javascript" src="src/cathasnlife.min.js"></script>
+      <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="uk-navbar-container uk-margin uk-navbar" uk-navbar="">
+      <div class="uk-navbar-center">
+        <div class="uk-navbar-center-left">
+          <ul class="uk-navbar-nav">
+            <li><a href="https://github.com/JiYouMCC/CatHasNLives" target="_blank">Github仓库</a></li>
+          </ul>
+        </div>
+        <a class="uk-navbar-item uk-logo" href="/">猫命规则发牌器</a>
+        <div class="uk-navbar-center-right">
+          <ul class="uk-navbar-nav">
+            <li>
+              <a href="#">预设规则 <span uk-icon="icon:  triangle-down"></a>
+              <div uk-dropdown="mode: click;">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                  <li><a href="#" onclick="setRule(rule_7);">【7人规则】</a></li>
+                  <li><a href="#" onclick="setRule(rule_9);">【9人规则】</a></li>
+                  <li><a href="#" onclick="setRule(rule_single);">【12人3杀1.0规则】</a></li>
+                  <li><a href="#" onclick="setRule(rule_20);">【12人3警3杀2.0规则】</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="uk-container">
+      <div uk-grid>
+        <div class="uk-width-1-3">
+          <h4>基本参数</h4>
+          <form class="uk-form-horizontal">
+            <div class="uk-margin">
+              <label class="uk-form-label" for="playerCount">玩家数量</label>
+              <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" id="playerCount" type="number" value="7" min="1">
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="cardEach">每人牌数</label>
+              <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" id="cardEach" type="number" value="5" min="1">
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="optionalCount">自选阵营人数</label>
+              <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" id="optionalCount" type="number" value="1" min="0">
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="killerHelperCount">杀助人数</label>
+              <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" id="killerHelperCount" type="number" value="0" min="0">
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="werewolfHelperCount">狼崽人数</label>
+              <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" id="werewolfHelperCount" type="number" value="0" min="0">
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label">每人水牌数量范围</label>
+              <div class="uk-form-controls">
+                <input class="uk-input uk-form-small" id="resourceMin" type="number" value="1" min="0"> ~ <input class="uk-input uk-form-small" id="resourceMax" type="number" value="2" min="0">
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label"><input class="uk-checkbox" type="checkbox" id="keepResource"> 水牌不得弃</label>
+            </div>
+          </form>
+      </div>
+        <div class="uk-width-1-3">
+          <h4>牌组设定</h4>
+          <form class="uk-form-stacked">
+            <div class="uk-margin">
+              <label class="uk-form-label" for="cardIdentity">身份特权牌</label>
+              <div class="uk-form-controls">
+                <textarea class="uk-textarea uk-form-small" rows="2" id="cardIdentity" rows="14">杀手牌,1
+狼人牌,1</textarea>
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="cardResource">资源牌</label>
+              <div class="uk-form-controls">
+                <textarea class="uk-textarea uk-form-small" rows="2" id="cardResource" rows="14">庶民牌,12</textarea>
+              </div>
+            </div>
+            <div class="uk-margin">
+              <label class="uk-form-label" for="cardPrivilege">特权牌</label>
+              <div class="uk-form-controls uk-form-small">
+                <textarea class="uk-textarea uk-form-small" id="cardPrivilege" rows="3">狙击手牌,2
 束魂牌,2
 巫医牌,2
 防弹衣/狼毒牌,2
@@ -62,13 +107,17 @@
 诅咒/庇佑牌,2
 纵火/圣人牌,2
 保镖牌,3
-阿米巴变形牌,3</textarea></td>
-        </tr>
-    </table>
-    <table border="1">
-        <caption>玩家设定</caption>
-        <tbody>
-            <tr><td><textarea rows="16" id="players">斑马
+阿米巴变形牌,3</textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="uk-width-1-3">
+          <h4>玩家设定</h4>
+          <form class="uk-form-stacked">
+            <div class="uk-margin">
+              <div class="uk-form-controls">
+                <textarea class="uk-textarea uk-form-small" rows="15" id="players">斑马
 叶子
 小蝶
 楼兰
@@ -76,18 +125,23 @@
 瓶子
 折光
 鸡毛
-飞鱼</textarea></td></tr>
-        </tbody>
-    </table>
-    <p style="clear: both">
-    <p><button onclick="doingLicense();">发牌</button></p>
-    <div style="width: 100%;margin:auto;">
-    <table id="result_table" border="1">
-        <caption>发牌结果</caption>
+飞鱼</textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <button class="uk-button uk-button-primary uk-align-center" onclick="doingLicense();">发牌</button>
+      <h4>发牌结果</h4>
+      <table id="result_table" class="uk-table uk-table-small uk-table-striped">
         <tbody id="result">
+          <tr>
+            <td>未发牌</td>
+          </tr>
         </tbody>
-    </table>
+      </table>
     </div>
-</body>
-
+  </body>
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/uikit.min.js"></script>
 </html>

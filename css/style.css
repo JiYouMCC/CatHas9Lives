@@ -20,37 +20,6 @@
     color: green;
 }
 
-body {
-    text-align: center;
-}
-
-table {
-    margin: 5px;
-    float: left;
-    min-width: 25%;
-}
-
-caption {
-    font-weight: bold;
-}
-
 input[type="number"] {
     width: 40px;
-}
-
-textarea {
-    width: 125px;
-}
-
-#result_table {
-    float: initial;
-    margin:auto;
-}
-
-.card_item {
-    width: 120px;
-}
-
-#players {
-    width:100%;
 }
